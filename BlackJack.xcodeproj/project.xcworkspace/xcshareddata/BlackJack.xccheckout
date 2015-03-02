@@ -10,6 +10,8 @@
 	<string>BlackJack</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+		<key>153BECA062ADAB156EDE58F0EF155BE4770ECC88</key>
+		<string>https://github.com/xzhangjohn/NYU-SOE-IOS-HW-2-BlackJack.git</string>
 		<key>7F610921C1202C289AE283E0279A6FD9D040273E</key>
 		<string>https://github.com/xzhangjohn/NYU-SOE-IOS-HW-1-BlackJack.git</string>
 	</dict>
@@ -17,15 +19,17 @@
 	<string>BlackJack.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>7F610921C1202C289AE283E0279A6FD9D040273E</key>
+		<key>153BECA062ADAB156EDE58F0EF155BE4770ECC88</key>
 		<string>../..</string>
+		<key>7F610921C1202C289AE283E0279A6FD9D040273E</key>
+		<string>../../../NYU-SOE-IOS-HW-1-BlackJack</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/xzhangjohn/NYU-SOE-IOS-HW-1-BlackJack.git</string>
+	<string>https://github.com/xzhangjohn/NYU-SOE-IOS-HW-2-BlackJack.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>7F610921C1202C289AE283E0279A6FD9D040273E</string>
+	<string>153BECA062ADAB156EDE58F0EF155BE4770ECC88</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
@@ -35,6 +39,14 @@
 			<string>7F610921C1202C289AE283E0279A6FD9D040273E</string>
 			<key>IDESourceControlWCCName</key>
 			<string>NYU-SOE-IOS-HW-1-BlackJack</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>153BECA062ADAB156EDE58F0EF155BE4770ECC88</string>
+			<key>IDESourceControlWCCName</key>
+			<string>NYU-SOE-IOS-HW-2-BlackJack</string>
 		</dict>
 	</array>
 </dict>
