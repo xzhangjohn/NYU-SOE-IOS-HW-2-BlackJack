@@ -9,13 +9,13 @@
 import Foundation
 //init card object
 
-    enum Suit: Character{
-        case Spades = "♠", Hearts = "♡", Diamonds = "♢", Clubs = "♣"
+    enum Suit: String{
+        case Spades = "spades", Hearts = "hearts", Diamonds = "diamonds", Clubs = "clubs"
     }
     
     enum Rank: Int {
-        case Two = 2, Three, Four, Five, Six, Seven, Eight, Nine, Ten
-        case Jack, Queen, King, Ace
+        case  Ace = 1, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten
+        case Jack, Queen, King
         struct Values {
             let first: Int, second: Int?
         }
@@ -34,8 +34,8 @@ import Foundation
 struct BlackJackCard {
     let rank: Rank, suit: Suit
     var description: String {
-        var output = "\(suit.rawValue)"
-        output += "\(rank.values.first)"
+        var output = "\(rank.rawValue)_of_"
+        output += "\(suit.rawValue)"
         return output
     }
 }

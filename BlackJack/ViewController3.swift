@@ -11,8 +11,6 @@ import UIKit
 class ViewController3: UIViewController {
     var numDeck: Int = Int()
     var betmoney = 0
-    var dcarddetail = ""
-    var pcarddetail = ""
     var dscore = 0
     var pscore = 0
     var gamecount = 0
@@ -20,6 +18,7 @@ class ViewController3: UIViewController {
     var newdealer: dealer!
     var fplayer: player!
     var initmoney = 100
+    var cardnum = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,8 +44,6 @@ class ViewController3: UIViewController {
     @IBOutlet weak var yourmoney: UILabel!
     @IBOutlet weak var inputmoney: UITextField!
     @IBOutlet weak var yourbet: UILabel!
-    @IBOutlet weak var dealercard: UILabel!
-    @IBOutlet weak var playercard: UILabel!
     @IBOutlet weak var hit: UIButton!
     @IBOutlet weak var gameover: UIButton!
     @IBOutlet weak var dtotal: UILabel!
@@ -55,6 +52,18 @@ class ViewController3: UIViewController {
     @IBOutlet weak var stand: UIButton!
     @IBOutlet weak var Deal: UIButton!
     @IBOutlet weak var inputbet: UILabel!
+    @IBOutlet weak var dimage1: UIImageView!
+    @IBOutlet weak var dimage2: UIImageView!
+    @IBOutlet weak var dimage3: UIImageView!
+    @IBOutlet weak var dimage4: UIImageView!
+    @IBOutlet weak var dimage5: UIImageView!
+    @IBOutlet weak var dimage6: UIImageView!
+    @IBOutlet weak var pimage1: UIImageView!
+    @IBOutlet weak var pimage2: UIImageView!
+    @IBOutlet weak var pimage3: UIImageView!
+    @IBOutlet weak var pimage4: UIImageView!
+    @IBOutlet weak var pimage5: UIImageView!
+    @IBOutlet weak var pimage6: UIImageView!
     
 
     @IBAction func Deal(sender: AnyObject) {
@@ -62,9 +71,18 @@ class ViewController3: UIViewController {
         newdealer.dcard.removeAll(keepCapacity: false)
         fplayer.pcard.removeAll(keepCapacity: false)
         
-        // add new card to player and dealer
-        fplayer.pcard.append(fplayer.addcard(newshoe.shoecard))
-        fplayer.pcard.append(fplayer.addcard(newshoe.shoecard))
+        dimage1.hidden = true
+        dimage2.hidden = true
+        dimage3.hidden = true
+        dimage4.hidden = true
+        dimage5.hidden = true
+        dimage6.hidden = true
+        pimage1.hidden = true
+        pimage2.hidden = true
+        pimage3.hidden = true
+        pimage4.hidden = true
+        pimage5.hidden = true
+        pimage6.hidden = true
         
         // check input betmoney
         if (toDouble(inputmoney.text) == nil){
@@ -81,48 +99,55 @@ class ViewController3: UIViewController {
             return
         }
         
+        
         // show bet money
         yourbet.text = "Bet: \(betmoney)"
         fplayer.pmoney = fplayer.pmoney - betmoney
         initmoney = fplayer.pmoney
         yourmoney.text = "Money: \(fplayer.pmoney)"
+
+        // add new card to player and dealer
+        fplayer.pcard.append(fplayer.addcard(newshoe.shoecard))
+        fplayer.pcard.append(fplayer.addcard(newshoe.shoecard))
+        pimage1.image = UIImage(named:"\(fplayer.pcard[0].description)")
+        pimage2.image = UIImage(named:"\(fplayer.pcard[1].description)")
+        newdealer.dcard.append(newdealer.addcard(newshoe.shoecard))
+        newdealer.dcard.append(newdealer.addcard(newshoe.shoecard))
+        dimage1.image = UIImage(named:"red_joker")
+        dimage2.image = UIImage(named:"\(newdealer.dcard[1].description)")
+        
+        pscore = fplayer.caculatescore(fplayer.pcard)
+        dscore = newdealer.caculatescore(newdealer.dcard)
+        total.text = "Total: \(pscore)"
+        
         Deal.hidden = true
         inputmoney.hidden = true
         yourbet.hidden = false
         inputbet.hidden = true
-        playercard.hidden = false
-        dealercard.hidden = false
         conclusion.hidden = true
-        pcarddetail = "\(fplayer.pcard[0].description)"
-        pcarddetail += fplayer.pcard[1].description
-        playercard.text = pcarddetail
-        dealercard.text = dcarddetail
         hit.hidden = false
         stand.hidden = false
         total.hidden = false
-        newdealer.dcard.append(newdealer.addcard(newshoe.shoecard))
-        newdealer.dcard.append(newdealer.addcard(newshoe.shoecard))
         dtotal.hidden = true
-        dcarddetail = "Hidden,"
-        dcarddetail += newdealer.dcard[1].description
-        dealercard.text = dcarddetail
-            
-        pscore = fplayer.caculatescore(fplayer.pcard)
-        dscore = newdealer.caculatescore(newdealer.dcard)
-        total.text = "Total: \(pscore)"
-            if (pscore == 21 && dscore != 21){
-                conclusion.text = "You won"
+        dimage1.hidden = false
+        dimage2.hidden = false
+        pimage1.hidden = false
+        pimage2.hidden = false
+        cardnum = 2
+        
+        if (pscore == 21 && dscore != 21){
+            conclusion.text = "You won"
+            stopgame()
+        }
+        else if (dscore == 21 && pscore != 21){
+            conclusion.text = "You lose"
+            stopgame()
+        }else if (dscore == 21 && dscore == pscore){
+            conclusion.text = "push"
                 stopgame()
-            }
-            else if (dscore == 21 && pscore != 21){
-                conclusion.text = "You lose"
-                stopgame()
-            }else if (dscore == 21 && dscore == pscore){
-                conclusion.text = "push"
-                stopgame()
-            }else{
-                conclusion.hidden = true
-            }
+        }else{
+            conclusion.hidden = true
+        }
         
     }
     
@@ -131,8 +156,18 @@ class ViewController3: UIViewController {
 
     @IBAction func restart(sender: AnyObject) {
         betmoney = 0
-        dcarddetail = ""
-        pcarddetail = ""
+        dimage1.hidden = true
+        dimage2.hidden = true
+        dimage3.hidden = true
+        dimage4.hidden = true
+        dimage5.hidden = true
+        dimage6.hidden = true
+        pimage1.hidden = true
+        pimage2.hidden = true
+        pimage3.hidden = true
+        pimage4.hidden = true
+        pimage5.hidden = true
+        pimage6.hidden = true
         dscore = 0
         pscore = 0
         gamecount = 0
@@ -142,8 +177,6 @@ class ViewController3: UIViewController {
         inputmoney.hidden = false
         inputbet.hidden = false
         yourbet.hidden = true
-        playercard.text = ""
-        dealercard.text = ""
         conclusion.text = "Let's play blackjack"
         viewDidLoad()
     }
@@ -151,13 +184,33 @@ class ViewController3: UIViewController {
 
     @IBAction func Hit(sender: AnyObject) {
         fplayer.pcard.append(fplayer.addcard(newshoe.shoecard))
-        pcarddetail += fplayer.pcard[fplayer.pcard.count-1].description
-        playercard.text = pcarddetail
+        cardnum += 1
+        if ((fplayer.pcard.count) == 3){
+            self.pimage3.image = UIImage(named:"\(self.fplayer.pcard[self.fplayer.pcard.count-1].description)")
+            pimage3.hidden = false
+        }
+        if ((fplayer.pcard.count) == 4){
+            self.pimage4.image = UIImage(named:"\(self.fplayer.pcard[self.fplayer.pcard.count-1].description)")
+            pimage4.hidden = false
+        }
+        if ((fplayer.pcard.count) == 5){
+            self.pimage5.image = UIImage(named:"\(self.fplayer.pcard[self.fplayer.pcard.count-1].description)")
+            pimage5.hidden = false
+        }
+        if ((fplayer.pcard.count) == 6){
+            self.pimage5.image = UIImage(named:"\(self.fplayer.pcard[self.fplayer.pcard.count-1].description)")
+            pimage6.hidden = false
+        }
         pscore = fplayer.caculatescore(fplayer.pcard)
         total.text = "Total: \(pscore)"
         if (pscore > 21){
             conclusion.text = "You lose"
             conclusion.hidden = false
+            stopgame()
+        }
+        if (cardnum == 6){
+            hit.hidden = true
+            stand.hidden = true
             stopgame()
         }
     }
@@ -173,18 +226,30 @@ class ViewController3: UIViewController {
     
     
     func showdealer(){
-        dcarddetail = ""
-        for i in 0..<newdealer.dcard.count{
-            dcarddetail += newdealer.dcard[i].description
+        dimage1.image = UIImage(named:"\(newdealer.dcard[0].description)")
+        if ((newdealer.dcard.count) == 3){
+            self.dimage3.image = UIImage(named:"\(self.newdealer.dcard[self.newdealer.dcard.count-1].description)")
+            dimage3.hidden = false
         }
-        dealercard.text = dcarddetail
+        if ((newdealer.dcard.count) == 4){
+            self.dimage4.image = UIImage(named:"\(self.newdealer.dcard[self.newdealer.dcard.count-1].description)")
+            dimage4.hidden = false
+        }
+        if ((newdealer.dcard.count) == 5){
+            self.dimage5.image = UIImage(named:"\(self.newdealer.dcard[self.newdealer.dcard.count-1].description)")
+            dimage5.hidden = false
+        }
+        if ((newdealer.dcard.count) == 6){
+            self.dimage5.image = UIImage(named:"\(self.newdealer.dcard[self.newdealer.dcard.count-1].description)")
+            dimage6.hidden = false
+        }
     }
     
 
     
     func stopgame (){
         // show dealer card
-        while (dscore < 17 && conclusion.hidden == true){
+        while (dscore < 17 && conclusion.hidden == true && newdealer.dcard.count < 7){
             newdealer.dcard.append(newdealer.addcard(newshoe.shoecard))
             dscore = newdealer.caculatescore(newdealer.dcard)
         }
